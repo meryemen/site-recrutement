@@ -29,7 +29,7 @@ if (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAI
 } else {
 // Préparation de la requête SQL
 
-$req = $bdd->prepare('INSERT INTO candidats (email, mot_de_passe, nom, prenom, ville, pays, telephone, date_naissance, sexe) VALUES (:email, :mot_de_passe, :nom, :prenom, :ville, :pays, :telephone, :date_naissance, :sexe)');
+$req = $bdd->prepare('INSERT INTO candidats (email, mot_de_passe, nom, prenom, ville, pays, telephone, date_naissance, sexe) VALUES (:email,  MD5(:mot_de_passe), :nom, :prenom, :ville, :pays, :telephone, :date_naissance, :sexe)');
 
 // Exécution de la requête SQL avec les valeurs des champs du formulaire
 if($req->execute(array(
