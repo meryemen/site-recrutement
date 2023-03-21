@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$recruteur) {
             $erreur = 'Cet email n\'existe pas.';
-        } elseif ($recruteur['mot_de_passe'] !== $motdepasse) {
-            $erreur = 'Mot de passe incorrect.';
-        } else {
+        } elseif (md5($recruteur['sel'] . $motdepasse) !== $recruteur['mot_de_passe']) {
+          $erreur = 'Mot de passe incorrect.';
+         }  else {
             $_SESSION['type_utilisateur'] = $type_utilisateur;
             $_SESSION['email'] = $email;
             $_SESSION['nom'] = $recruteur['nom'];
@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$candidat) {
             $erreur = 'Cet email n\'existe pas.';
-        } elseif ($candidat['mot_de_passe'] !== $motdepasse) {
-            $erreur = 'Mot de passe incorrect.';
-        } else {
+        } elseif (md5($candidat['sel'] . $motdepasse) !== $candidat['mot_de_passe']) {
+          $erreur = 'Mot de passe incorrect.';
+         } else {
             $_SESSION['type_utilisateur'] = $type_utilisateur;
             $_SESSION['email'] = $email;
             $_SESSION['nom'] = $candidat['nom'];
